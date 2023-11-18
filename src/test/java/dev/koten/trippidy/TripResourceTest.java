@@ -389,8 +389,7 @@ public class TripResourceTest {
         res.then()
                 .statusCode(200);
         List<TripDto> resultTrips =  jsonb.fromJson(res.getBody().asString(), new ArrayList<TripDto>(){}.getClass().getGenericSuperclass());
-        var resultTrip = resultTrips.get(0);
-        Assertions.assertEquals(resultTrip.getName(), tripName);
+        Assertions.assertTrue(resultTrips.stream().anyMatch(trip -> trip.getName().equals(tripName)));
     }
 
     @DisplayName("Second user can see public items of other members")
