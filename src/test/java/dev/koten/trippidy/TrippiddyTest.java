@@ -8,10 +8,8 @@ import dev.koten.trippidy.dto.MemberDto;
 import dev.koten.trippidy.dto.TripDto;
 import dev.koten.trippidy.dto.UserProfileDto;
 import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
-import net.jodah.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.*;
 
 import java.io.FileInputStream;
@@ -25,7 +23,7 @@ import java.util.logging.Logger;
 import static org.hamcrest.Matchers.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TripResourceTest {
+public class TrippiddyTest {
     private static final Logger log = Logger.getLogger(Thread.currentThread().getStackTrace()[1].getClassName());
     private static Jsonb jsonb;
     private static String idToken1;
