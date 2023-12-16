@@ -2,7 +2,6 @@ from locust import HttpUser, task, between, events
 import logging
 import requests
 import json
-from locust.env import Environment
 from locust.runners import MasterRunner, WorkerRunner
 
 logging.basicConfig()
@@ -19,23 +18,26 @@ username = "test@example.com"
 password = "Diplomka123"
 
 USER_CREDENTIALS = None
-print("================================================================")
-if (USER_CREDENTIALS == None):
-    USER_CREDENTIALS = requests.post(auth_url, {
-    'client_id': client_id,
-    'client_secret': client_secret,
-    'scope': 'openid',
-    'grant_type': 'password',
-    'username': username,
-    'password': password
-}).json()
     
 # Function to check node type
 def on_test_start(environment, **kwargs):
+    global USER_CREDENTIALS  # Declare USER_CREDENTIALS as global
+    
     if isinstance(environment.runner, MasterRunner):
         print("This node is a master.")
     elif isinstance(environment.runner, WorkerRunner):
         print("This node is a worker.")
+        print("================================================================")
+        if (USER_CREDENTIALS == None):
+            USER_CREDENTIALS = requests.post(auth_url, {
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'scope': 'openid',
+            'grant_type': 'password',
+            'username': username,
+            'password': password
+        }).json()
+        print(USER_CREDENTIALS)
     else:
         print("This is a standalone node.")
 
@@ -45,10 +47,10 @@ events.test_start.add_listener(on_test_start)
 logging.info(USER_CREDENTIALS)
 
 class Test(HttpUser):
+    global USER_CREDENTIALS  # Declare USER_CREDENTIALS as global
 
     wait_time = between(1, 3)
 
-    # Get the Bearer token for example using Postman for this simple testing purpose
     bearer = None
     trip = None
 
@@ -75,6 +77,7 @@ class Test(HttpUser):
     def on_start(self):
         
         self.bearer = "Bearer " + USER_CREDENTIALS["id_token"]
+        logging.info(self.bearer)
 
         self.trip = self.client.get("/api/v1/my/trip", headers = {"Authorization": self.bearer}).json()[0]
         logging.info(self.trip)
