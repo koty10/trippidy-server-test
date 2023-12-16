@@ -1,5 +1,5 @@
 # Trippidy Server Integration Tests
-This is a project for REST API integration tests for the Trippidy server
+This is a project for REST API integration tests and performance tests using Locust for the Trippidy server
 
 ## Integration Tests Run Instructions
 - Go to the integration_tests folder
