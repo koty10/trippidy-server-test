@@ -38,4 +38,8 @@ build/
 ### Mac OS ###
 .DS_Store
 
-src/main/resources/trippidy.properties
+trippidy.properties
+
+performance_tests/__pycache__
+
+config.json
