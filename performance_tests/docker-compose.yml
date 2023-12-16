@@ -7,7 +7,7 @@ services:
       - "8089:8089"
     volumes:
       - ./:/mnt/locust
-    command: -f /mnt/locust/test.py --master -H http://192.168.0.115:80
+    command: -f /mnt/locust/test.py --master -H https://trippidy.koten.dev:9680
   worker:
     image: locustio/locust
     volumes:
