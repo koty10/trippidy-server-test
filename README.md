@@ -9,7 +9,7 @@ This is a project for REST API integration tests and performance tests using Loc
 
 ## Performance Tests Run Instructions
 - Go to the performance_tests folder
-- Copy config.json.template toconfig.json and fill in values. I can send them by email as I do not want them to be present in a public repository.
+- Copy config.json.template to config.json and fill in values. I can send them by email as I do not want them to be present in a public repository.
 - Run `docker-compose up`
 - Open http://localhost:8089 (I had to use Firefox as Chrome did not allow me to access unsecured HTTP)
 - Run test
